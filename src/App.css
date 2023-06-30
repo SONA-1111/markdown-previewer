@@ -15,7 +15,7 @@ body{
     padding: 5px 0;
 }
 h1{
-    color: #262834;
+    color: #e3e3e3;
     font-size: 22px;
     padding: 8px;
 }
@@ -31,9 +31,13 @@ h1{
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
 }
+.prev{
+    text-align: left;
+    color: #f3f3f3;
+}
 .btns{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: minmax(60px, auto);
 }
 .btns button{
@@ -55,15 +59,7 @@ h1{
     color: #262834;
     font-weight: bold;
 }
-.btns button:first-of-type{
-    grid-column: 1/3;
-    grid-row: 1;
-}
-.btns button:last-of-type{
-    grid-column: 3/6;
-    grid-row: 1;
-}
-textarea{
+textarea , .prev{
     width: calc(100% - 10px);
     height: calc(100vh - 150px);
     border: none;
@@ -83,3 +79,55 @@ textarea{
     font-family: monospace, sans-serif;
     font-size: 20px;
 }
+.docs{
+    background-color: #121212;
+    text-align: left;
+    margin-bottom: 10px;
+    padding: 12px 21px;
+    color: #e8e8e8;
+    overflow-y: auto;
+}
+.example{
+    background-color: #c2bfbf;
+    text-align: left;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 12px 21px;
+}
+
+.example .title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+
+code {
+    font-size: 18px;
+    word-break: break-word;
+}
+
+  .spinner-container{
+    height: 75vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .spinner-loading {
+    width: 50px;
+    height: 50px;
+    border: 10px solid #f3f3f3; 
+    border-top: 10px solid #383636;
+    border-radius: 50%;
+    animation: spiner 1.5s linear infinite;
+}
+
+
+    @keyframes spiner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }

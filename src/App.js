@@ -1,11 +1,14 @@
 import './App.css';
-import React, {useState} from 'react';
-import {marked} from 'marked'
+import React, { useState} from 'react';
+import { marked } from 'marked'
+import Docs from './components/Docks';
+import useLocalStorage from './hooks/useLocalStorage';
 
 const App = () => {
-  const [code, setCode] = useState('## Hello')
-  const [compiled, setCompiled] = useState('<h2 id="hello">Hello</h2>')
+  const [code, setCode] = useLocalStorage('markdown', '## Hello')
+  const [compiled, setCompiled] = useState()
   const [hide, hidePreview] = useState(true)
+  const [show, showDocs] = useState(true)
 
   const openMD = () => {
     console.log(0)
@@ -15,8 +18,15 @@ const App = () => {
   const openPreview = () => {
     console.log(0)
     hidePreview(false)
+    showDocs(false)
+    setCompiled(marked(code));
   }
 
+  const openDocs = () => {
+    console.log(0)
+    showDocs(true)
+    hidePreview(false)
+  }
   const handleChange = (e) => {
     setCode(e.target.value)
     setCompiled(marked.parse(e.target.value))
@@ -28,21 +38,23 @@ const App = () => {
       <div className="container">
         <div className="btns">
           <button onClick={openMD} className="btn">MarkDown</button>
-          <button onClick={openPreview}>Preview</button>
+          <button className="btn" onClick={openPreview}>Preview</button>
+          <button className="btn" onClick={openDocs}>Docs</button>
+
         </div>
+
         {
-        hide ? 
-          <div>
-            <textarea onChange={handleChange} value={code}/>
-          </div> : 
-          <div>
-            <textarea value={compiled}/>
-          </div>
+          hide ?
+            <div>
+              <textarea onChange={handleChange} value={code} />
+            </div> : show ? <Docs /> : <div className='prev'>
+              <div dangerouslySetInnerHTML={{ __html: compiled }} />
+            </div>
+
         }
+
       </div>
     </>
-  )
+  );
 }
-
-
 export default App;
